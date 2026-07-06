@@ -1,62 +1,61 @@
-📝 Project Overview
-A Streamlit-based web application designed to support student mental health through:
-🤖 AI-powered chatbot (GPT-4) for emotional support
-📊 Mood tracking with visualization
-📔 Secure journaling system
-🔐 User authentication
+# Mental Health Companion
 
-Important Note: This repository does NOT include the .env file containing the OpenAI API key required for the chatbot functionality. You will need to provide your own API key to use this feature.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
 
-🛠️ Technologies Used
-Frontend: Streamlit
-Backend: Python
-Database: SQLite
-AI: OpenAI API (GPT-4)
-Styling: CSS
+A Streamlit web app that supports student mental health through:
 
-⚙️ Setup Instructions
-Prerequisites
-Python 3.8+
+- 🤖 AI-powered chatbot (GPT-4) for emotional support
+- 📊 Mood tracking with visualization
+- 📔 Secure journaling system
+- 🔐 User authentication (bcrypt-hashed passwords)
 
-OpenAI API key (if using chatbot feature)
+## Setup
 
-- Installation -
-Clone the repository:
+**Prerequisites:** Python 3.8+, an OpenAI API key (only needed for the chatbot feature).
 
-- bash -
-git clone https://github.com/[your-username]/mental-health-companion.git
-cd mental-health-companion
-Install dependencies:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/AregSahakyan04/mental-health-companion.git
+   cd mental-health-companion
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Create a `.env` file in the project root with your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_api_key_here
+   ```
+4. Run the application:
+   ```bash
+   streamlit run auth.py
+   ```
 
-- bash -
-pip install -r requirements.txt
-Create a .env file in the root directory with your OpenAI API key:
+## Tech Stack
 
-OPENAI_API_KEY=your_api_key_here
+- **Frontend:** Streamlit
+- **Backend:** Python
+- **Database:** SQLite
+- **AI:** OpenAI API (GPT-4)
+- **Charts:** Matplotlib
 
-Run the application:
-bash - streamlit run 1_Home.py
+## Notes
 
-⚠️ Important Notes
+- The `.env` file is not included in this repository — you must supply your own OpenAI API key to use the chatbot feature.
+- All user data is stored locally in `mental_health.db` (no cloud dependency).
+- Passwords are hashed with **bcrypt** (salted, adaptive cost) rather than raw SHA-256, to avoid the rainbow-table weaknesses of unsalted fast hashes.
 
-API Key Requirement:
-The chatbot feature requires an OpenAI API key
-You must provide your own key in a .env file
-Never commit your .env file to version control
+## Features
 
-Data Privacy:
-All user data is stored locally in mental_health.db
-Passwords are hashed using SHA-256
+- User registration and login
+- Light/dark theme toggle
+- Daily mood tracking with visualization
+- Private journal with date-based entries
+- AI-powered mental health chatbot
+- Local data storage (no cloud dependencies)
 
-🌟 Features
-User registration and login
-Light/dark theme toggle
-Daily mood tracking with visualization
-Private journal with date-based entries
-AI-powered mental health chatbot
-Local data storage (no cloud dependencies)
+## Acknowledgments
 
-🙏 Acknowledgments
-Streamlit for the web framework
-OpenAI for the GPT API
-Research in cognitive behavioral therapy and expressive writing
+- [Streamlit](https://streamlit.io/) for the web framework
+- [OpenAI](https://openai.com/) for the GPT API

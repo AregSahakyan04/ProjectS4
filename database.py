@@ -1,5 +1,5 @@
 import sqlite3
-import hashlib
+import bcrypt
 
 DB_NAME = "mental_health.db"
 
@@ -28,9 +28,9 @@ def init_db():
     conn.close()
 
 
-# Hash passwords using SHA-256
+# Hash passwords using bcrypt (salted, adaptive cost)
 def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 # Register a new user
 def register_user(username, email, password):
@@ -50,7 +50,9 @@ def register_user(username, email, password):
 def login_user(username, password):
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
-    c.execute("SELECT * FROM users WHERE username=? AND password=?", (username, hash_password(password)))
-    user = c.fetchone()
+    c.execute("SELECT password FROM users WHERE username=?", (username,))
+    row = c.fetchone()
     conn.close()
-    return user is not None
+    if row is None:
+        return False
+    return bcrypt.checkpw(password.encode(), row[0].encode())
